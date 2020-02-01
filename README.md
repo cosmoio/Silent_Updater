@@ -29,7 +29,7 @@ Basically those files polled for new versions of the main client application (ta
 						** Postcondition: binary has same version number x.y.z.w as was downloaded					
 						** Postcondition: new path: 	C:\Users\%name%\AppData\Local\INSTALLLOCATION\x.y.z.w\	
 						** Postcondition: new user.dat is overwritten by old user.dat							 			
-					    ** Postcondition: contents of e.g. user.dat are:	See below for contents *0			
+						** Postcondition: contents of e.g. user.dat are:	See below for contents *0			
 						** Postcondition: contents of folder are:	See below for contents *1					
 			- [x] Config Update:
 						** Precondition: configfile has version number x' < x or y' < y or z' < z or w' < w
