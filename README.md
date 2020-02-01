@@ -1,12 +1,20 @@
 # Silent_Updater
-Quite some time ago I needed to update a program on client machines, silently. To do that I built a tool that ran in the background and polled for a new version of the main client application. It then proceeded to silently update and install the new version on the clients.
+Quite some time ago I needed to update a program on client machines, silently. To do that I built a tool that ran as two processes in the background (cupdt.exe, client_check.exe).
+* client_check: updates the updater
+* cupdt.exe: updates the target 
+
+Basically those files polled for new versions of the main client application (target) and the updater. It new versions were available they proceeded to silently update and install the new version of the updater or the target on the clients.
+
+## Notes
+* By splitting the job in two processes, it is easier to include unforeseen functionality to the updater (e.g. certificate pinning, if one wanted)
+
 
 ## Algorithm sketch:
 ```
 	- [x] A Process 1: start updater, 
 	- [x] B Process 1: find new version,
 		- [x] if	B1 = new version in %appdata%					
-			    - [x] B10 really new version, check file version	
+				- [x] B10 really new version, check file version	
 				- [x] B11 remove autostart entry (Entry: TARGET_x.y.z.w is removed)
 				- [x] B12 start new updater (same as C2)
 				- [x] B13 close this updater (basic return seems to suffice)
@@ -42,15 +50,16 @@ Quite some time ago I needed to update a program on client machines, silently. T
 <?xml version="1.0" encoding="utf-8"?>
 <User xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 ....
-							</User>
-							  	- C:\Users\user\AppData\Local\INSTALLLOCATION\x.y.z.w:
-								- client_check_x.y.z.w (configfile)										
-								- user.dat					    												
-								- TargetClient          <-- file version stored in PE32
-								- client_check.exe		<-- file version stored in PE32
-								- NDde.dll				<-- excluded from versioning
-								- RestSharp.dll			<-- excluded from versioning
-								- cupdt.exe 			<-- file version stored in PE32
-								- cupdt.manifest
-								- README					
+</User>
+
+- C:\Users\user\AppData\Local\INSTALLLOCATION\x.y.z.w:
+- client_check_x.y.z.w (configfile)										
+- user.dat					    												
+- TargetClient          <-- file version stored in PE32
+- client_check.exe		<-- file version stored in PE32
+- NDde.dll				<-- excluded from versioning
+- RestSharp.dll			<-- excluded from versioning
+- cupdt.exe 			<-- file version stored in PE32
+- cupdt.manifest
+- README					
 ```
