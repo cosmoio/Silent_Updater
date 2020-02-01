@@ -43,23 +43,21 @@ Basically those files polled for new versions of the main client application (ta
 		- [x] C1 registry change to this version if not already this version	(Entry: TARGET_x.y.z.w is inserted)
 		- [x] C2 start target: %appdata%\INSTALLLOCATION\x.y.z.w\target.exe  
 		- [x] C3 start loop, update check									
-```
-### Contents:
-```
+Contents:
 *0 
 <?xml version="1.0" encoding="utf-8"?>
 <User xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-....
+...
 </User>
 
 - C:\Users\user\AppData\Local\INSTALLLOCATION\x.y.z.w:
 - client_check_x.y.z.w (configfile)										
-- user.dat					    												
-- TargetClient          <-- file version stored in PE32
-- client_check.exe		<-- file version stored in PE32
-- NDde.dll				<-- excluded from versioning
-- RestSharp.dll			<-- excluded from versioning
-- cupdt.exe 			<-- file version stored in PE32
+- user.dat					    									
+- TargetClient		<-- file version stored in PE32
+- client_check.exe	<-- file version stored in PE32
+- NDde.dll		<-- excluded from versioning
+- RestSharp.dll		<-- excluded from versioning
+- cupdt.exe		<-- file version stored in PE32
 - cupdt.manifest
 - README					
 ```
